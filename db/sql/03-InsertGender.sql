@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `Gender` (
+	`GenderId`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`GenderDesc`	TEXT NOT NULL UNIQUE
+);
+INSERT INTO `Gender` (`GenderId`,`GenderDesc`)VALUES 
+(1, 'Female'),
+(2, 'Male');
