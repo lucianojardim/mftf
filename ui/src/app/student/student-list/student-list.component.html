@@ -1,33 +1,50 @@
 <h2>
-    List of students
+  Estudantes
 </h2>
+<div class="text-info">
+  <a routerLinkActive="active" [routerLink]="['/students/add']">Adicionar</a>
+</div>
 <hr>
 <div class=table-responsive>
-    <table class=table>
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Birthday</th>
-            <th>Mother</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let student of students; let i = index">
-            <th scope=row><a routerLinkActive="active" [routerLink]="['/students/'+student.studentId]">{{student.studentId}}</a></th>
-            <td><a routerLinkActive="active" [routerLink]="['/students/'+student.studentId]">{{student.studentFirstName}}</a></td>
-            <td><a routerLinkActive="active" [routerLink]="['/students/'+student.studentId]">{{student.studentLastName}}</a></td>
-            <td><a routerLinkActive="active" [routerLink]="['/students/'+student.studentId]">{{student.studentDateBirth}}</a></td>
-            <td><a routerLinkActive="active" [routerLink]="['/students/'+student.studentId]">{{student.studentMotherName}}</a></td>
-        </tr>
-        </tbody>
-    </table>
+  <table class=table>
+    <thead>
+    <tr>
+      <th class="hidden">#</th>
+      <th></th>
+      <th></th>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Dt.Nasc.</th>
+      <th>Mae</th>
+      <th>Unidade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of students; let i = index">
+      <th class="hidden" scope=row><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.id}}</a>
+      </th>
+      <td><a routerLinkActive="active" [routerLink]="['/students/delete/'+student.id]">Remover</a></td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/update/'+student.id]">Atualizar</a></td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.firstName}}</a>
+      </td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.lastName}}</a>
+      </td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.dateBirth | date:
+        'dd/MM/yyyy'}}</a>
+      </td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.motherName}}</a>
+      </td>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.enrollmentMostCurrent.educationCenter.name}}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <router-outlet></router-outlet>
 </div>
 <div *ngIf="err">
-    <h3>Error found executing: student-list.component.</h3>
-    <hr>
-    <div class="bg-danger text-danger">
-        {{err}}
-    </div>
+  <h3>Error found executing: student-list.component.</h3>
+  <hr>
+  <div class="bg-danger text-danger">
+    {{err}}
+  </div>
 </div>

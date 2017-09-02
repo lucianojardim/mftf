@@ -1,8 +1,8 @@
 <div class="container-fluid">
-  <p class="text-info">Enter your email address:</p>
+  <p class="text-info">Email:</p>
   <input class="form-control" required type="email" name="userInput" pattern="[^ @]*@[^ @]*" ngModel
          #userInput="ngModel" title="userInput"/>
-  <div class="help-block bg-danger" *ngIf="!userInput.valid && userInput.touched">Please enter a valid email address!
+  <div class="help-block bg-danger" *ngIf="!userInput.valid && userInput.touched">Endereco de email invalido!
   </div>
   <button (click)="getUserInformationByEmailAddress(userInput.value)" class="btn btn-default" [disabled]="!userInput.valid">
     Login

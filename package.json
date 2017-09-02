@@ -1,0 +1,26 @@
+{
+  "name": "mftf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucianojardim/mftf.git"
+  },
+  "dependencies": {
+    "compress": "^0.99.0",
+    "cors": "^2.8.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucianojardim/mftf/issues"
+  },
+  "homepage": "https://github.com/lucianojardim/mftf#readme"
+}

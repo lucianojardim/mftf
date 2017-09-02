@@ -9,6 +9,16 @@ import { StudentModule } from './student/student.module';
 
 import { AppComponent } from './app.component';
 
+import {GenderService} from './student/lookup-values/gender/gender.service';
+import {CityService} from './student/lookup-values/city/city.service';
+import {CountryService} from './student/lookup-values/country/country.service';
+import {EducationCenterService} from './shared/education-center/education-center.service';
+import {EnrollmentStatusService} from './student/lookup-values/enrollment-status/enrollment-status.service';
+import {GroupService} from './student/lookup-values/group/group.service';
+import {RaceService} from './student/lookup-values/race/race.service';
+import {SchoolingService} from './student/lookup-values/schooling/schooling.service';
+import {StateService} from './student/lookup-values/state/state.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +32,15 @@ import { AppComponent } from './app.component';
     StudentModule
   ],
   providers: [
+    CityService,
+    CountryService,
+    EducationCenterService,
+    EnrollmentStatusService,
+    GenderService,
+    GroupService,
+    RaceService,
+    SchoolingService,
+    StateService
   ],
   bootstrap: [AppComponent]
 })
