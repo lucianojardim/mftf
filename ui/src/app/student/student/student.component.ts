@@ -13,15 +13,14 @@ import {Student} from '../student.model';
 export class StudentComponent implements OnInit {
 
   studentIdParam: Observable<string>;
+  studentId: number = 0;
   student: Student;
   err: Error | null | undefined;
   formattedDateBirth: string;
-  studentId: number = 0;
   submitSuccessful: boolean;
 
   constructor(private _studentService: StudentService,
               private _activatedRoute: ActivatedRoute) {
-    this.studentIdParam = this._activatedRoute.params.map(p => p.studentId);
   }
 
   async ngOnInit() {
@@ -29,11 +28,12 @@ export class StudentComponent implements OnInit {
       await this.findOne(await this.getStudentId())
     } catch (err) {
       this.err = err;
+      throw err;
     }
   }
 
   async getStudentId(): Promise<number> {
-
+    this.studentIdParam = this._activatedRoute.params.map(p => p.studentId);
     await this.studentIdParam.subscribe(
       (p) => this.studentId = +p
     );
@@ -46,6 +46,7 @@ export class StudentComponent implements OnInit {
       this.formattedDateBirth = this.student.dateBirth.toISOString().substring(0, 10);
     } catch (err) {
       this.err = err;
+      throw err;
     }
   }
 
@@ -54,6 +55,7 @@ export class StudentComponent implements OnInit {
       this.submitSuccessful = await this._studentService.remove(this.studentId);
     } catch (err) {
       this.err = err;
+      throw err;
     }
   }
 

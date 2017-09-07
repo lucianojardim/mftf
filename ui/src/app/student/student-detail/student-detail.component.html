@@ -349,17 +349,17 @@
                        [(ngModel)]="student.hadChickenpox" #hadChickenpox="ngModel">
                 <label class="small" for="hadRubella">Rubeola</label>
                 <input type="checkbox" class="form-control" id="hadRubella" name="hadRubella"
-                       [(ngModel)]="student.hadRubella" #hadRubella="ngModel">>
+                       [(ngModel)]="student.hadRubella" #hadRubella="ngModel">
                 <label class="small" for="hadDehydration">Desidratacao</label>
                 <input type="checkbox" class="form-control" id="hadDehydration" name="hadDehydration"
-                       [(ngModel)]="student.hadDehydration" #hadDehydration="ngModel">>
+                       [(ngModel)]="student.hadDehydration" #hadDehydration="ngModel">
                 <label class="small" for="hadMumps">Caxumba</label>
                 <input type="checkbox" class="form-control" id="hadMumps" name="hadMumps" [(ngModel)]="student.hadMumps"
-                       #hadMumps="ngModel">>
+                       #hadMumps="ngModel">
                 <label class="small" for="hadOtherContagiousDiseaseDesc">Quais outras doencas?</label>
                 <input type="text" class="form-control" id="hadOtherContagiousDiseaseDesc" placeholder="sarampo"
                        name="hadOtherContagiousDiseaseDesc" [(ngModel)]="student.hadOtherContagiousDiseaseDesc"
-                       #hadOtherContagiousDiseaseDescx="ngModel">>
+                       #hadOtherContagiousDiseaseDescx="ngModel">
               </div>
             </fieldset>
             <div class="form-group">
@@ -490,11 +490,14 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]=!f.form.valid>Confirmar</button>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Adicao
+    <button type="submit" class="btn btn-success"
+            [disabled]="!f.form.valid || (f.form.valid && (submitSuccessful===true || !submitSuccessful===false))">
+      Confirmar
+    </button>
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Operacao
       falhou
     </div>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">matricula
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">Operacao
       efetuada
     </div>
   </form>

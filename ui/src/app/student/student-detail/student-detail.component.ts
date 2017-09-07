@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Observable} from "rxjs/Observable";
 
 import {Student} from '../student.model';
 import {Gender} from '../lookup-values/gender/gender.model';
@@ -27,6 +28,9 @@ import {Group} from '../lookup-values/group/group.model';
   styleUrls: ['./student-detail.component.css']
 })
 export class StudentDetailComponent implements OnInit {
+  studentIdParam: Observable<string>;
+  studentId: number = 0;
+
   student: Student;
   genders: Gender[] = [];
   races: Race[] = [];
@@ -35,6 +39,7 @@ export class StudentDetailComponent implements OnInit {
   schoolings: Schooling[] = [];
   educationCenters: EducationCenter[] = [];
   groups: Group[] = [];
+  err: Error | null | undefined;
 
   // autocomplete for City
   queryBirthPlaceCity: string = '';
@@ -58,12 +63,25 @@ export class StudentDetailComponent implements OnInit {
               private _activatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit() {
-    this.setSelectOptions();
+  async ngOnInit() {
+    try {
+      this.setSelectOptions();
+
+      if (this._isActivatedRouteUpdate()) {
+        await this.findOne(await this.getStudentId());
+      }
+
+      if (this._isActivatedRouteAdd()) {
+        this.student = this._studentService.resetStudent();
+      }
+
+    } catch (err) {
+      this.err = err;
+      throw err;
+    }
   }
 
-  setSelectOptions() {
-    this.student = this._studentService.resetStudent();
+  setSelectOptions(): void {
     this.genders = this._genderService.getAllElements();
     this.races = this._raceService.getAllElements();
     this.cities = this._cityService.getAllElements();
@@ -111,9 +129,28 @@ export class StudentDetailComponent implements OnInit {
     try {
       this.submitSuccessful = await this._studentService.save(this.student);
     } catch (err) {
+      this.err = err;
       throw err;
     }
+  }
 
+  async getStudentId(): Promise<number> {
+    this.studentIdParam = this._activatedRoute.params.map(p => p.studentId);
+    await this.studentIdParam.subscribe(
+      (p) => this.studentId = +p
+    );
+    return Promise.resolve(this.studentId);
+  }
+
+  async findOne(studentId: number): Promise<void> {
+    try {
+      this.student = await this._studentService.findOne(studentId);
+      this.queryBirthPlaceCity = this.student.birthPlaceCity.name;
+      this.queryAddressLocalityCity = this.student.addressLocalityCity.name;
+    } catch (err) {
+      this.err = err;
+      throw err;
+    }
   }
 
   filterBirthPlaceCity() {
@@ -134,6 +171,14 @@ export class StudentDetailComponent implements OnInit {
     } else {
       this.filteredListAddressLocalityCity = [];
     }
+  }
+
+  private _isActivatedRouteUpdate(): boolean {
+    return this._activatedRoute.toString().indexOf('update') > 0;
+  }
+
+  private _isActivatedRouteAdd(): boolean {
+    return this._activatedRoute.toString().indexOf('add') > 0;
   }
 
 }
