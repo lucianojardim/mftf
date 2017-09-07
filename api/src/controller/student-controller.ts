@@ -23,13 +23,33 @@ export class StudentController {
     }
 
     @Post("/students")
-    save(@Body() student: Student): Promise<RunResult> {
-        return this.studentRepository.save(student);
+    save(@Body() student: Student): Promise<boolean> {
+        this.studentRepository.save(student)
+            .then(
+                (runResult: RunResult) => {
+                    if (runResult.changes > 0) {
+                        return Promise.resolve(true);
+                    }
+                })
+            .catch((err: Error) => {
+                return Promise.reject(err)
+            });
+        return Promise.resolve(true);
     }
 
     @Delete("/students/:studentId")
-    remove(@Param("studentId") studentId: number): Promise<RunResult> {
-        return this.studentRepository.remove(studentId);
+    remove(@Param("studentId") studentId: number): Promise<boolean> {
+        this.studentRepository.remove(studentId)
+            .then(
+                (runResult: RunResult) => {
+                    if (runResult.changes > 0) {
+                        return Promise.resolve(true);
+                    }
+                })
+            .catch((err: Error) => {
+                return Promise.reject(err)
+            });
+        return Promise.resolve(true);
     }
 
 }

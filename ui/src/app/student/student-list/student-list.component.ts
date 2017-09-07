@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { StudentService } from '../student.service';
-import { Student } from '../student.model';
+import {StudentService} from '../student.service';
+import {Student} from '../student.model';
 
 @Component({
   selector: 'app-student-list',
@@ -13,7 +13,8 @@ export class StudentListComponent implements OnInit {
   students: Student[] = [];
   err: Error | null | undefined;
 
-  constructor(private _studentService: StudentService) { }
+  constructor(private _studentService: StudentService) {
+  }
 
   async ngOnInit() {
     await this.findAll();
@@ -25,7 +26,6 @@ export class StudentListComponent implements OnInit {
     } catch (err) {
       this.err = err;
     }
-
-}
+  }
 
 }

@@ -1,219 +1,501 @@
 <div class="container">
   <h2>Cadastro de Matricula na Educacao Infantil</h2>
   <hr>
-  <form>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Crianca</legend>
-      <div class="form-group">
-        <label for="firstName">Nome</label>
-        <div class="form-inline">
-          <input type="text" class="form-control" id="firstName" placeholder="Jose" required>
-          <input type="text" class="form-control" id="middleName" placeholder="Mariano Rocha" required>
-          <input type="text" class="form-control" id="lastName" placeholder="Azevedo" required>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+               aria-controls="collapseOne">
+              Crianca
+            </a>
+          </h4>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="gender">Sexo</label>
-        <input type="text" class="form-control" id="gender" placeholder="masculino" required>
-      </div>
-      <div class="form-group">
-        <label for="dateBirth">Dt.Nasc.</label>
-        <input type="date" class="form-control" id="dateBirth" placeholder="27/01/2015" required>
-      </div>
-      <div class="form-group">
-        <label for="race">Cor/Raca</label>
-        <input type="text" class="form-control" id="race" placeholder="negro" required>
-      </div>
-      <div class="form-group">
-        <label for="birthPlaceCity">Naturalidade</label>
-        <div class="form-inline">
-          <input type="text" class="form-control" id="birthPlaceCity" placeholder="Goiania" required>
-          <input type="text" class="form-control" id="birthPlaceState" placeholder="Goias" required>
-          <input type="text" class="form-control" id="birthPlaceCountry" placeholder="Brasil">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="birthCertificateId">Cert.Nasc.</label>
-        <input type="text" class="form-control" id="birthCertificateId" placeholder="02673201552015100266145010939591"
-               required>
-      </div>
-      <div class="form-group">
-        <label for="addressStreet">Endereco</label>
-        <div class="form-inline">
-          <input type="text" class="form-control" id="addressStreet" placeholder="Rua Luiz do Couto" required>
-          <input type="text" class="form-control" id="addressCompletement" placeholder="Q.195 Lt.3 Casa 2">
-          <input type="text" class="form-control" id="addressSubDivision" placeholder="Setor Pedro Ludovico">
-          <input type="text" class="form-control" id="addressLocalityCity" placeholder="Goiania" required>
-          <input type="text" class="form-control" id="addressLocalityState" placeholder="Goias" required>
-          <input type="text" class="form-control" id="addressLocalityCountry" placeholder="Brasil">
-          <input type="number" class="form-control" id="addressZipCode" placeholder="74830100" required>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Mae</legend>
-      <div class="form-group">
-        <label for="motherName">Nome</label>
-        <input type="text" class="form-control" id="motherName" placeholder="Maria de Souza Aguiar" required>
-      </div>
-      <div class="form-group">
-        <label for="motherGovernmentId">CPF</label>
-        <input type="text" class="form-control" id="motherGovernmentId" placeholder="039.493.293.01" required>
-      </div>
-      <div class="form-group">
-        <label for="motherSchooling">Escolaridade</label>
-        <input type="text" class="form-control" id="motherSchooling" placeholder="Ensino Medio Completo" required>
-      </div>
-      <div class="form-group">
-        <label for="motherDateBirth">Dt.Nasc.</label>
-        <input type="date" class="form-control" id="motherDateBirth" placeholder="negro" required>
-      </div>
-      <div class="form-group">
-        <label for="motherProfession">Profissao</label>
-        <input type="text" class="form-control" id="motherProfession" placeholder="Professora" required>
-      </div>
-      <div class="form-group">
-        <label for="motherPhoneNum">Telefone</label>
-        <input type="text" class="form-control" id="motherPhoneNum" placeholder="953628273/84327327" required>
-      </div>
-    </fieldset>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Pai</legend>
-      <div class="form-group">
-        <label for="fatherName">Nome</label>
-        <input type="text" class="form-control" id="fatherName" placeholder="Geraldo de Souza Aguiar">
-      </div>
-      <div class="form-group">
-        <label for="fatherGovernmentId">CPF</label>
-        <input type="text" class="form-control" id="fatherGovernmentId" placeholder="039.493.293.01">
-      </div>
-      <div class="form-group">
-        <label for="fatherSchooling">Escolaridade</label>
-        <input type="text" class="form-control" id="fatherSchooling" placeholder="Ensino Medio Completo">
-      </div>
-      <div class="form-group">
-        <label for="fatherDateBirth">Dt.Nasc.</label>
-        <input type="date" class="form-control" id="fatherDateBirth" placeholder="negro">
-      </div>
-      <div class="form-group">
-        <label for="fatherProfession">Profissao</label>
-        <input type="text" class="form-control" id="fatherProfession" placeholder="Contador">
-      </div>
-      <div class="form-group">
-        <label for="fatherPhoneNum">Telefone</label>
-        <input type="text" class="form-control" id="fatherPhoneNum" placeholder="953628273/84327327">
-      </div>
-    </fieldset>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Emergencias</legend>
-      <div class="form-group">
-        <label for="emergencyPhoneNum01">Telefone</label>
-        <input type="text" class="form-control" id="emergencyPhoneNum01" placeholder="953628273">
-      </div>
-      <div class="form-group">
-        <label for="emergencyContactName01">Name</label>
-        <input type="text" class="form-control" id="emergencyContactName01" placeholder="Alex (avo)">
-      </div>
-      <div class="form-group">
-        <label for="emergencyPhoneNum02">Telefone</label>
-        <input type="text" class="form-control" id="emergencyPhoneNum02" placeholder="84327327">
-      </div>
-      <div class="form-group">
-        <label for="emergencyContactName02">Name</label>
-        <input type="text" class="form-control" id="emergencyContactName02" placeholder="Antonio (tio)">
-      </div>
-      <div class="form-group">
-        <label for="observations">Obs</label>
-        <input type="text" class="form-control" id="observations" placeholder="Pai/Mae autorizados a buscar.">
-      </div>
-      <div class="form-group">
-        <label for="photoFileName">Foto</label>
-        <input type="text" class="form-control" id="photoFileName" placeholder="estudanteMarceloArroyo.png">
-      </div>
-    </fieldset>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Saude da crianca</legend>
-      <fieldset class="form-group mftf-border">
-        <legend class="mftf-border">Doencas que ja teve</legend>
-        <div class="form-group form-inline">
-          <label for="hadChickenpox">Catapora</label>
-          <input type="checkbox" class="form-control" id="hadChickenpox">
-          <label for="hadRubella">Rubeola</label>
-          <input type="checkbox" class="form-control" id="hadRubella">
-          <label for="hadDehydration">Desidratacao</label>
-          <input type="checkbox" class="form-control" id="hadDehydration">
-          <label for="hadMumps">Caxumba</label>
-          <input type="checkbox" class="form-control" id="hadMumps">
-          <label for="hadOtherContagiousDiseaseDesc">Quais outras doencas?</label>
-          <input type="text" class="form-control" id="hadOtherContagiousDiseaseDesc">
-        </div>
-      </fieldset>
-      <div class="form-group">
-        <label for="hasAlergies">Lista das alergias</label>
-        <input type="text" class="form-control" id="hasAlergies" placeholder="penicilina mofo">
-      </div>
-      <div class="form-group">
-        <label for="hasCardiacDiseases">Lista dos problemas cardiacos ou neurologicos</label>
-        <input type="text" class="form-control" id="hasCardiacDiseases" placeholder="arritimia dislexia">
-      </div>
-      <fieldset class="form-group mftf-border">
-        <legend class="mftf-border">Deficiencias</legend>
-        <div class="form-group form-inline">
-          <label for="hasAuditiveDeficency">Auditiva</label>
-          <input type="checkbox" class="form-control" id="hasAuditiveDeficency">
-          <label for="hasVisualDeficency">Visual</label>
-          <input type="checkbox" class="form-control" id="hasVisualDeficency">
-          <label for="hasMentalDeficency">Mental</label>
-          <input type="checkbox" class="form-control" id="hasMentalDeficency">
-          <label for="hasMotorDeficency">Motora</label>
-          <input type="checkbox" class="form-control" id="hasMotorDeficency">
-        </div>
-      </fieldset>
-      <div class="form-group form-inline">
-        <label for="hasBrochitisOrAsthma">Tem bronquite ou falta de ar</label>
-        <input type="checkbox" class="form-control" id="hasBrochitisOrAsthma">
-      </div>
-      <div class="form-group form-inline">
-        <label for="hasRecurringDiarrhea">Tem diarreia com frequencia</label>
-        <input type="checkbox" class="form-control" id="hasRecurringDiarrhea">
-      </div>
-      <div class="form-group form-inline">
-        <label for="hasConvulsions">Tem convulsoes</label>
-        <input type="checkbox" class="form-control" id="hasConvulsions">
-      </div>
-      <div class="form-group form-inline">
-        <label for="needConstantMedicalSupervision">Vai ao pediatra regularmente</label>
-        <input type="checkbox" class="form-control" id="needConstantMedicalSupervision">
-      </div>
-    </fieldset>
-    <fieldset class="form-group mftf-border">
-      <legend class="mftf-border">Matricula</legend>
-      <div class="form-group">
-        <label for="enrollmentEducationCenter">Unidade</label>
-        <input type="text" class="form-control" id="enrollmentEducationCenter" placeholder="Efata">
-      </div>
-      <div class="form-group">
-        <label for="enrollmentGroup">Grupo</label>
-        <input type="text" class="form-control" id="enrollmentGroup" placeholder="1C">
-      </div>
-      <div class="form-group">
-        <label for="enrollmentDate">Data</label>
-        <input type="date" class="form-control" id="enrollmentDate" placeholder="01/01/2017">
-      </div>
-      <div class="form-group">
-        <label for="enrollmentGuardianName">Responsavel</label>
-        <input type="text" class="form-control" id="enrollmentGuardianName" placeholder="Antonio Jose da Silva">
-      </div>
-      <div class="form-group">
-        <label for="enrollmentSchoolCoordinatorName">Coordenador</label>
-        <input type="text" class="form-control" id="enrollmentSchoolCoordinatorName" placeholder="Kezia">
-      </div>
-      <div class="form-group">
-        <label for="enrollmentStatus">Status</label>
-        <input type="text" class="form-control" id="enrollmentStatus" placeholder="Digitado">
-      </div>
-    </fieldset>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Crianca</legend>-->
+            <div class="form-group">
+              <label class="small" for="firstName">Nome</label>
+              <div class="form-inline">
+                <input type="text" class="form-control" id="firstName" placeholder="Jose" name="firstName"
+                       [(ngModel)]="student.firstName" #firstname="ngModel" required>
+                <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger small">Nome e'
+                  obrigatorio
+                </div>
+                <input type="text" class="form-control" id="middleName" placeholder="Mariano Rocha" name="middleName"
+                       [(ngModel)]="student.middleName" #middleName="ngModel">
+                <input type="text" class="form-control" id="lastName" placeholder="Azevedo" name="lastName"
+                       [(ngModel)]="student.lastName" #lastName="ngModel" required>
+                <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger small">Sobrenome e'
+                  obrigatorio
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="gender">Sexo</label>
+              <select title="Sexo" class="form-control" id="gender" (change)="onSelectedGender()" name="gender"
+                      [(ngModel)]="student.gender" #gender="ngModel" required>
+                <option *ngFor="let gender of genders" [ngValue]="gender">{{gender.name}}</option>
+              </select>
+              <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger small">Sexo e' obrigatorio</div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="dateBirth">Dt.Nasc.</label>
+              <input type="date" class="form-control" id="dateBirth" placeholder="27/01/2015" name="dateBirth"
+                     [(ngModel)]="student.dateBirth" #dateBirth="ngModel" required>
+              <div [hidden]="dateBirth.valid || dateBirth.pristine" class="alert alert-danger small">Data de nascimento
+                e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="race">Cor/Raca</label>
+              <select title="Raca" class="form-control" id="race" (change)="onSelectedRace()" name="race"
+                      [(ngModel)]="student.race" #race="ngModel" required>
+                <option *ngFor="let race of races" [ngValue]="race">{{race.name}}</option>
+              </select>
+              <div [hidden]="race.valid || race.pristine" class="alert alert-danger small">Raca e' obrigatorio</div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="birthPlaceCity">Naturalidade</label>
+              <div class="form-inline">
+                <input type="text" class="form-control" id="birthPlaceCity" placeholder="Goiania" name="birthPlaceCity"
+                       [(ngModel)]="queryBirthPlaceCity" (keyup)="filterBirthPlaceCity()" #birthPlaceCity="ngModel"
+                       required>
+                <div [hidden]="birthPlaceCity.valid || birthPlaceCity.pristine" class="alert alert-danger small">Cidade
+                  e' obrigatorio
+                </div>
+                <div *ngIf="filteredListBirthPlaceCity.length > 0">
+                  <ul class="list-group-item-heading">
+                    <li class="list-unstyled" *ngFor="let cityName of filteredListBirthPlaceCity">
+                      <a (click)="onSelectedBirthPlaceCity(cityName)">{{cityName}}</a>
+                    </li>
+                  </ul>
+                </div>
 
-    <button type="submit" class="btn btn-success">Adicionar</button>
+                <select title="birthPlaceState" class="form-control" id="birthPlaceState"
+                        (change)="onSelectedBirthPlaceState()" name="birthPlaceState"
+                        [(ngModel)]="student.birthPlaceState" #birthPlaceState="ngModel" required>
+                  <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
+                </select>
+                <div [hidden]="birthPlaceState.valid || birthPlaceState.pristine" class="alert alert-danger small">
+                  Estado e' obrigatorio
+                </div>
+
+                <input type="text" class="form-control hidden" id="birthPlaceCountry" placeholder="Brasil">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="birthCertificateId">Cert.Nasc.</label>
+              <input type="text" class="form-control" id="birthCertificateId"
+                     placeholder="02673201552015100266145010939591" name="birthCertificateId"
+                     [(ngModel)]="student.birthCertificateId" #birthCertificateId="ngModel" required>
+              <div [hidden]="birthCertificateId.valid || birthCertificateId.pristine" class="alert alert-danger small">
+                Certidao de nascimento e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="addressStreet">Endereco</label>
+              <div class="form-inline">
+                <input type="text" class="form-control" id="addressStreet" placeholder="Rua Luiz do Couto"
+                       name="addressStreet" [(ngModel)]="student.addressStreet" #addressStreet="ngModel" required>
+                <div [hidden]="addressStreet.valid || addressStreet.pristine" class="alert alert-danger small">Rua e'
+                  obrigatorio
+                </div>
+                <input type="text" class="form-control" id="addressCompletement" placeholder="Q.195 Lt.3 Casa 2"
+                       name="addressCompletement" [(ngModel)]="student.addressCompletement"
+                       #addressCompletement="ngModel">
+                <input type="text" class="form-control" id="addressSubDivision" placeholder="Setor Pedro Ludovico"
+                       name="addressSubDivision" [(ngModel)]="student.addressSubDivision" #addressSubDivision="ngModel">
+              </div>
+              <div class="form-inline">
+                <input type="text" class="form-control" id="addressLocalityCity" placeholder="Goiania"
+                       name="addressLocalityCity" [(ngModel)]="queryAddressLocalityCity"
+                       (keyup)="filterAddressLocalityCity()" #addressLocalityCity="ngModel" required>
+                <div [hidden]="addressLocalityCity.valid || addressLocalityCity.pristine"
+                     class="alert alert-danger small">Cidade e' obrigatorio
+                </div>
+                <div *ngIf="filteredListAddressLocalityCity.length > 0">
+                  <ul class="list-group-item-heading">
+                    <li class="list-unstyled" *ngFor="let cityName of filteredListAddressLocalityCity">
+                      <a (click)="onSelectedAddressLocalityCity(cityName)">{{cityName}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <select title="addressLocalityState" class="form-control" id="addressLocalityState"
+                        (change)="onSelectedAddressLocalityState()" name="addressLocalityState"
+                        [(ngModel)]="student.addressLocalityState" #addressLocalityState="ngModel" required>
+                  <option *ngFor="let state of states" [ngValue]="state">{{state.name}}</option>
+                </select>
+                <div [hidden]="addressLocalityState.valid || addressLocalityState.pristine"
+                     class="alert alert-danger small">Estado e' obrigatorio
+                </div>
+
+                <input type="text" class="form-control hidden" id="addressLocalityCountry" placeholder="Brasil">
+                <input type="number" class="form-control" id="addressZipCode" placeholder="74830100"
+                       name="addressZipCode" [(ngModel)]="student.addressZipCode" #addressZipCode="ngModel" required>
+                <div [hidden]="addressZipCode.valid || addressZipCode.pristine" class="alert alert-danger small">CEP e'
+                  obrigatorio
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+               aria-expanded="false" aria-controls="collapseTwo">
+              Mae
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Mae</legend>-->
+            <div class="form-group">
+              <label class="small" for="motherName">Nome</label>
+              <input type="text" class="form-control" id="motherName" placeholder="Maria de Souza Aguiar"
+                     name="motherName" [(ngModel)]="student.motherName" #motherName="ngModel" required>
+              <div [hidden]="motherName.valid || motherName.pristine" class="alert alert-danger small">Nome e'
+                obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="motherGovernmentId">CPF</label>
+              <input type="text" class="form-control" id="motherGovernmentId" placeholder="039.493.293.01"
+                     name="motherGovernmentId" [(ngModel)]="student.motherGovernmentId" #motherGovernmentId="ngModel"
+                     required>
+              <div [hidden]="motherGovernmentId.valid || motherGovernmentId.pristine" class="alert alert-danger small">
+                CPF e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="motherSchooling">Escolaridade</label>
+              <select title="motherSchooling" class="form-control" id="motherSchooling"
+                      (change)="onSelectedMotherSchooling()" name="motherSchooling"
+                      [(ngModel)]="student.motherSchooling" #motherSchooling="ngModel" required>
+                <option *ngFor="let schooling of schoolings" [ngValue]="schooling">{{schooling.name}}</option>
+              </select>
+              <div [hidden]="motherSchooling.valid || motherSchooling.pristine" class="alert alert-danger small">
+                Escolaridade e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="motherDateBirth">Dt.Nasc.</label>
+              <input type="date" class="form-control" id="motherDateBirth" placeholder="01/01/1990"
+                     name="motherDateBirth" [(ngModel)]="student.motherDateBirth" #motherDateBirth="ngModel" required>
+              <div [hidden]="motherDateBirth.valid || motherDateBirth.pristine" class="alert alert-danger small">Data de
+                nascimento e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="motherProfession">Profissao</label>
+              <input type="text" class="form-control" id="motherProfession" placeholder="Professora"
+                     name="motherProfession" [(ngModel)]="student.motherProfession" #motherProfession="ngModel"
+                     required>
+              <div [hidden]="motherProfession.valid || motherProfession.pristine" class="alert alert-danger small">
+                Profissao e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="motherPhoneNum">Telefone</label>
+              <input type="tel" class="form-control" id="motherPhoneNum" placeholder="953628273/84327327"
+                     name="motherPhoneNum" [(ngModel)]="student.motherPhoneNum" #motherPhoneNum="ngModel" required>
+              <div [hidden]="motherPhoneNum.valid || motherPhoneNum.pristine" class="alert alert-danger small">Telefone
+                e' obrigatorio
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+               aria-expanded="false" aria-controls="collapseThree">
+              Pai
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Pai</legend>-->
+            <div class="form-group">
+              <label class="small" for="fatherName">Nome</label>
+              <input type="text" class="form-control" id="fatherName" placeholder="Antonio Jose da Silva"
+                     name="fatherName" [(ngModel)]="student.fatherName" #fatherName="ngModel">
+              <div [hidden]="fatherName.valid || fatherName.pristine" class="alert alert-danger small">Nome e'
+                invalido
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="fatherGovernmentId">CPF</label>
+              <input type="text" class="form-control" id="fatherGovernmentId" placeholder="039.493.293.01"
+                     name="fatherGovernmentId" [(ngModel)]="student.fatherGovernmentId" #fatherGovernmentId="ngModel">
+              <div [hidden]="fatherGovernmentId.valid || fatherGovernmentId.pristine" class="alert alert-danger small">
+                CPF e' invalido
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="fatherSchooling">Escolaridade</label>
+              <select title="fatherSchooling" class="form-control" id="fatherSchooling"
+                      (change)="onSelectedMotherSchooling()" name="fatherSchooling"
+                      [(ngModel)]="student.fatherSchooling" #fatherSchooling="ngModel">
+                <option *ngFor="let schooling of schoolings" [ngValue]="schooling">{{schooling.name}}</option>
+              </select>
+              <div [hidden]="fatherSchooling.valid || fatherSchooling.pristine" class="alert alert-danger small">
+                Escolaridade e' invalido
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="fatherDateBirth">Dt.Nasc.</label>
+              <input type="date" class="form-control" id="fatherDateBirth" placeholder="01/01/1990"
+                     name="fatherDateBirth" [(ngModel)]="student.fatherDateBirth" #fatherDateBirth="ngModel">
+              <div [hidden]="fatherDateBirth.valid || fatherDateBirth.pristine" class="alert alert-danger small">Data de
+                nascimento e' invalido
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="fatherProfession">Profissao</label>
+              <input type="text" class="form-control" id="fatherProfession" placeholder="Contador"
+                     name="fatherProfession" [(ngModel)]="student.fatherProfession" #fatherProfession="ngModel">
+              <div [hidden]="fatherProfession.valid || fatherProfession.pristine" class="alert alert-danger small">
+                Profissao e' invalido
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="fatherPhoneNum">Telefone</label>
+              <input type="tel" class="form-control" id="fatherPhoneNum" placeholder="953628273/84327327"
+                     name="fatherPhoneNum" [(ngModel)]="student.fatherPhoneNum" #fatherPhoneNum="ngModel">
+              <div [hidden]="fatherPhoneNum.valid || fatherPhoneNum.pristine" class="alert alert-danger small">Telefone
+                e' invalido
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFour">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
+               aria-expanded="false" aria-controls="collapseFour">
+              Em caso de emergencia
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Emergencias</legend>-->
+            <div class="form-group">
+              <label class="small" for="emergencyPhoneNum01">Telefone</label>
+              <input type="text" class="form-control" id="emergencyPhoneNum01" placeholder="953628273"
+                     name="emergencyPhoneNum01" [(ngModel)]="student.emergencyPhoneNum01"
+                     #emergencyPhoneNum01="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="emergencyContactName01">Name</label>
+              <input type="text" class="form-control" id="emergencyContactName01" placeholder="Alex (avo)"
+                     name="emergencyContactName01" [(ngModel)]="student.emergencyContactName01"
+                     #emergencyContactName01="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="emergencyPhoneNum02">Telefone</label>
+              <input type="text" class="form-control" id="emergencyPhoneNum02" placeholder="84327327"
+                     name="emergencyPhoneNum02" [(ngModel)]="student.emergencyPhoneNum02"
+                     #emergencyPhoneNum02="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="emergencyContactName02">Name</label>
+              <input type="text" class="form-control" id="emergencyContactName02" placeholder="Antonio (tio)"
+                     name="emergencyContactName02" [(ngModel)]="student.emergencyContactName02"
+                     #emergencyContactName02="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="observations">Obs</label>
+              <input type="text" class="form-control" id="observations" placeholder="Pai/Mae autorizados a buscar."
+                     name="observations" [(ngModel)]="student.observations" #observations="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="photoFileName">Foto</label>
+              <input type="text" class="form-control" id="photoFileName" placeholder="estudanteMarceloArroyo.png"
+                     name="photoFileName" [(ngModel)]="student.photoFileName" #photoFileName="ngModel">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFive">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive"
+               aria-expanded="false" aria-controls="collapseFive">
+              Saude da crianca
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Saude da crianca</legend>-->
+            <fieldset class="form-group mftf-border">
+              <legend class="mftf-border">Doencas que ja teve</legend>
+              <div class="form-group form-inline">
+                <label class="small" for="hadChickenpox">Catapora</label>
+                <input type="checkbox" class="form-control check" id="hadChickenpox" name="hadChickenpox"
+                       [(ngModel)]="student.hadChickenpox" #hadChickenpox="ngModel">
+                <label class="small" for="hadRubella">Rubeola</label>
+                <input type="checkbox" class="form-control" id="hadRubella" name="hadRubella"
+                       [(ngModel)]="student.hadRubella" #hadRubella="ngModel">>
+                <label class="small" for="hadDehydration">Desidratacao</label>
+                <input type="checkbox" class="form-control" id="hadDehydration" name="hadDehydration"
+                       [(ngModel)]="student.hadDehydration" #hadDehydration="ngModel">>
+                <label class="small" for="hadMumps">Caxumba</label>
+                <input type="checkbox" class="form-control" id="hadMumps" name="hadMumps" [(ngModel)]="student.hadMumps"
+                       #hadMumps="ngModel">>
+                <label class="small" for="hadOtherContagiousDiseaseDesc">Quais outras doencas?</label>
+                <input type="text" class="form-control" id="hadOtherContagiousDiseaseDesc" placeholder="sarampo"
+                       name="hadOtherContagiousDiseaseDesc" [(ngModel)]="student.hadOtherContagiousDiseaseDesc"
+                       #hadOtherContagiousDiseaseDescx="ngModel">>
+              </div>
+            </fieldset>
+            <div class="form-group">
+              <label class="small" for="hasAlergies">Lista das alergias</label>
+              <input type="text" class="form-control" id="hasAlergies" placeholder="penicilina mofo" name="hasAlergies"
+                     [(ngModel)]="student.hasAlergies" #hasAlergies="ngModel">
+            </div>
+            <div class="form-group">
+              <label class="small" for="hasCardiacDiseases">Lista dos problemas cardiacos ou neurologicos</label>
+              <input type="text" class="form-control" id="hasCardiacDiseases" placeholder="arritimia dislexia"
+                     name="hasCardiacDiseases" [(ngModel)]="student.hasCardiacDiseases" #hasCardiacDiseases="ngModel">
+            </div>
+            <fieldset class="form-group mftf-border">
+              <legend class="mftf-border">Deficiencias</legend>
+              <div class="form-group form-inline">
+                <label class="small" for="hasAuditiveDeficency">Auditiva</label>
+                <input type="checkbox" class="form-control" id="hasAuditiveDeficency" name="hasAuditiveDeficency"
+                       [(ngModel)]="student.hasAuditiveDeficency" #hasAuditiveDeficency="ngModel">
+                <label class="small" for="hasVisualDeficency">Visual</label>
+                <input type="checkbox" class="form-control" id="hasVisualDeficency" name="hasVisualDeficency"
+                       [(ngModel)]="student.hasVisualDeficency" #hasVisualDeficency="ngModel">
+                <label class="small" for="hasMentalDeficency">Mental</label>
+                <input type="checkbox" class="form-control" id="hasMentalDeficency" name="hasMentalDeficency"
+                       [(ngModel)]="student.hasMentalDeficency" #hasMentalDeficency="ngModel">
+                <label class="small" for="hasMotorDeficency">Motora</label>
+                <input type="checkbox" class="form-control" id="hasMotorDeficency" name="hasMotorDeficency"
+                       [(ngModel)]="student.hasMotorDeficency" #hasMotorDeficency="ngModel">
+              </div>
+            </fieldset>
+            <div class="form-group form-inline">
+              <label class="small" for="hasBrochitisOrAsthma">Tem bronquite ou falta de ar</label>
+              <input type="checkbox" class="form-control" id="hasBrochitisOrAsthma" name="hasBrochitisOrAsthma"
+                     [(ngModel)]="student.hasBrochitisOrAsthma" #hasBrochitisOrAsthma="ngModel">
+            </div>
+            <div class="form-group form-inline">
+              <label class="small" for="hasRecurringDiarrhea">Tem diarreia com frequencia</label>
+              <input type="checkbox" class="form-control" id="hasRecurringDiarrhea" name="hasRecurringDiarrhea"
+                     [(ngModel)]="student.hasRecurringDiarrhea" #hasRecurringDiarrhea="ngModel">
+            </div>
+            <div class="form-group form-inline">
+              <label class="small" for="hasConvulsions">Tem convulsoes</label>
+              <input type="checkbox" class="form-control" id="hasConvulsions" name="hasConvulsions"
+                     [(ngModel)]="student.hasConvulsions" #hasConvulsions="ngModel">
+            </div>
+            <div class="form-group form-inline">
+              <label class="small" for="needConstantMedicalSupervision">Vai ao pediatra regularmente</label>
+              <input type="checkbox" class="form-control" id="needConstantMedicalSupervision"
+                     name="needConstantMedicalSupervision" [(ngModel)]="student.needConstantMedicalSupervision"
+                     #needConstantMedicalSupervision="ngModel">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingSix">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix"
+               aria-expanded="false" aria-controls="collapseSix">
+              Historico das Matriculas
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+          <fieldset class="form-group-sm">
+            <!--<legend class="mftf-border">Matricula</legend>-->
+            <div class="form-group">
+              <label class="small" for="enrollmentEducationCenter">Unidade</label>
+              <select title="enrollmentEducationCenter" class="form-control" id="enrollmentEducationCenter"
+                      (change)="onSelectedEnrollmentEducationCenter()" name="enrollmentEducationCenter"
+                      [(ngModel)]="student.enrollments[0].educationCenter" #enrollmentEducationCenter="ngModel"
+                      required>
+                <option *ngFor="let educationCenter of educationCenters" [ngValue]="educationCenter">
+                  {{educationCenter.name}}
+                </option>
+              </select>
+              <div [hidden]="enrollmentEducationCenter.valid || enrollmentEducationCenter.pristine"
+                   class="alert alert-danger small">Unidade e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="enrollmentGroup">Grupo</label>
+              <select title="enrollmentGroup" class="form-control" id="enrollmentGroup"
+                      (change)="onSelectedEnrollmentGroup()" name="enrollmentGroup"
+                      [(ngModel)]="student.enrollments[0].group" #enrollmentGroup="ngModel" required>
+                <option *ngFor="let group of groups" [ngValue]="group">{{group.name}}</option>
+              </select>
+              <div [hidden]="enrollmentGroup.valid || enrollmentGroup.pristine" class="alert alert-danger small">Grupo
+                e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="studentEnrollmentDate">Data</label>
+              <input type="date" class="form-control" id="studentEnrollmentDate" placeholder="01/01/2017"
+                     name="studentEnrollmentDate" [(ngModel)]="student.enrollments[0].studentEnrollmentDate"
+                     #studentEnrollmentDate="ngModel" required>
+              <div [hidden]="studentEnrollmentDate.valid || studentEnrollmentDate.pristine"
+                   class="alert alert-danger small">Data e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="studentEnrollmentGuardianName">Responsavel</label>
+              <input type="text" class="form-control" id="studentEnrollmentGuardianName"
+                     placeholder="Antonio Jose da Silva" name="studentEnrollmentGuardianName"
+                     [(ngModel)]="student.enrollments[0].studentEnrollmentGuardianName"
+                     #studentEnrollmentGuardianName="ngModel" required>
+              <div [hidden]="studentEnrollmentGuardianName.valid || studentEnrollmentGuardianName.pristine"
+                   class="alert alert-danger small">Responsavel e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="small" for="studentEnrollmentSchoolCoordinatorName">Coordenador(a)</label>
+              <input type="text" class="form-control" id="studentEnrollmentSchoolCoordinatorName" placeholder="Kezia"
+                     name="studentEnrollmentSchoolCoordinatorName"
+                     [(ngModel)]="student.enrollments[0].studentEnrollmentSchoolCoordinatorName"
+                     #studentEnrollmentSchoolCoordinatorName="ngModel" required>
+              <div
+                [hidden]="studentEnrollmentSchoolCoordinatorName.valid || studentEnrollmentSchoolCoordinatorName.pristine"
+                class="alert alert-danger small">Coordenador(a) e' obrigatorio
+              </div>
+            </div>
+            <div class="form-group hidden">
+              <label class="small" for="enrollmentStatus">Status</label>
+              <input type="text" class="form-control" id="enrollmentStatus" placeholder="Digitado">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]=!f.form.valid>Confirmar</button>
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Adicao
+      falhou
+    </div>
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">matricula
+      efetuada
+    </div>
   </form>
 </div>

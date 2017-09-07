@@ -9,8 +9,7 @@ export class GroupService {
 
   constructor() {
     this._elements = [
-      new Group(1, 'Brasil'),
-      new Group(2, 'Outro')
+      new Group(1, 'C'),
     ];
   }
 

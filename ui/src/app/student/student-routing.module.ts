@@ -9,23 +9,19 @@ const studentRoutes: Routes = [
   {
     path: '', component: StudentListComponent
   },
-  {
-    path: 'detail', component: StudentDetailComponent, children: [
-    {path: ':studentId', component: StudentComponent}
-  ]
-  },
+  // {
+  //   path: 'detail', component: StudentDetailComponent, children: [
+  //   {path: ':studentId', component: StudentComponent}
+  // ]
+  // },
   {
     path: 'add', component: StudentDetailComponent
   },
   {
-    path: 'delete', component: StudentDetailComponent, children: [
-    {path: ':studentId', component: StudentComponent}
-  ]
+    path: 'delete/:studentId', component: StudentComponent
   },
   {
-    path: 'update', component: StudentDetailComponent, children: [
-    {path: ':studentId', component: StudentComponent}
-  ]
+    path: 'update/:studentId', component: StudentDetailComponent
   }
 ];
 

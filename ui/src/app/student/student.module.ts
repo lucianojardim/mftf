@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import {FormsModule} from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -12,11 +13,12 @@ import {StudentDetailComponent} from './student-detail/student-detail.component'
 @NgModule({
   imports: [
     HttpModule,
+    FormsModule,
     SharedModule,
     StudentRoutingModule
   ],
   declarations: [
-      StudentListComponent,
+    StudentListComponent,
     StudentComponent,
     StudentDetailComponent
   ]

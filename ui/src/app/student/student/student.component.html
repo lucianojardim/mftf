@@ -1,3 +1,84 @@
-<p>
-  student works!
-</p>
+<div class="container">
+  <h2>Confirme a operacao</h2>
+  <hr>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <fieldset class="form-group-sm">
+      <!--<legend class="mftf-border">Crianca</legend>-->
+      <div class="form-group">
+        <label class="small" for="firstName">Nome</label>
+        <div class="form-inline">
+          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.firstName"
+                 #firstname="ngModel" readonly>
+          <input type="text" class="form-control" title="middlename" id="middleName" name="middleName"
+                 [(ngModel)]="student.middleName"
+                 #middleName="ngModel" readonly>
+          <input type="text" class="form-control" title="lastname" id="lastName" name="lastName"
+                 [(ngModel)]="student.lastName"
+                 #lastName="ngModel" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="gender">Sexo</label>
+        <input type="text" class="form-control" id="gender" name="gender" [(ngModel)]="student.gender.name"
+               #gender="ngModel" readonly>
+      </div>
+      <div class="form-group">
+        <label class="small" for="dateBirth">Dt.Nasc.</label>
+        <input type="text" class="form-control" id="dateBirth" name="dateBirth" [(ngModel)]="formattedDateBirth"
+               #dateBirth="ngModel" readonly>
+      </div>
+      <div class="form-group">
+        <label class="small" for="race">Cor/Raca</label>
+        <input type="text" class="form-control" id="race" name="race" [(ngModel)]="student.race.name" #race="ngModel"
+               readonly>
+      </div>
+      <div class="form-group">
+        <label class="small" for="birthPlaceCity">Naturalidade</label>
+        <div class="form-inline">
+          <input type="text" class="form-control" id="birthPlaceCity" name="birthPlaceCity"
+                 [(ngModel)]="student.birthPlaceCity.name" #birthPlaceCity="ngModel" readonly>
+          <input type="text" class="form-control" title="birthPlaceState" id="birthPlaceState" name="birthPlaceState"
+                 [(ngModel)]="student.birthPlaceState.name" #birthPlaceCity="ngModel" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="birthCertificateId">Cert.Nasc.</label>
+        <input type="text" class="form-control" id="birthCertificateId" name="birthCertificateId"
+               [(ngModel)]="student.birthCertificateId" #birthCertificateId="ngModel" readonly>
+      </div>
+      <div class="form-group">
+        <label class="small" for="addressStreet">Endereco</label>
+        <div class="form-inline">
+          <input type="text" class="form-control" id="addressStreet" name="addressStreet"
+                 [(ngModel)]="student.addressStreet" #addressStreet="ngModel" readonly>
+          <input type="text" class="form-control" title="adddressComplement" id="addressCompletement"
+                 name="addressCompletement"
+                 [(ngModel)]="student.addressCompletement" #addressCompletement="ngModel" readonly>
+          <input type="text" class="form-control" title="addressSubDivision" id="addressSubDivision"
+                 name="addressSubDivision"
+                 [(ngModel)]="student.addressSubDivision" #addressSubDivision="ngModel" readonly>
+        </div>
+        <div class="form-inline">
+          <input type="text" class="form-control" title="addressLocalityCity" id="addressLocalityCity"
+                 name="addressLocalityCity"
+                 [(ngModel)]="student.addressLocalityCity.name" #addressLocalityCity="ngModel" readonly>
+          <input type="text" class="form-control" title="addressLocalityState" id="addressLocalityState"
+                 name="addressLocalityState"
+                 [(ngModel)]="student.addressLocalityState.name" #addressLocalityState="ngModel" readonly>
+          <input type="number" class="form-control" title="addressZipCode" id="addressZipCode" name="addressZipCode"
+                 [(ngModel)]="student.addressZipCode" #addressZipCode="ngModel" readonly>
+        </div>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-success" [disabled]="submitSuccessful===true || submitSuccessful===false">
+      Confirmar
+    </button>
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Operacao
+      falhou
+    </div>
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">Operacao
+      confirmada
+    </div>
+  </form>
+</div>
