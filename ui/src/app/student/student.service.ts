@@ -17,10 +17,10 @@ import {StudentDatabase} from './student-database.interface';
 
 @Injectable()
 export class StudentService {
-  private studentHostName = 'localhost';
+  private studentHostName = 'secure-beach-78142.herokuapp.com';
   private studentPortNum = 3000;
   private studentHost: string = this.studentHostName + ':' + this.studentPortNum;
-  private url: string = 'http://' + this.studentHost;
+  private url: string = 'https://' + this.studentHost;
 
   constructor(private _http: Http,
               private _genderService: GenderService,
