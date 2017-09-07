@@ -493,13 +493,13 @@
     </div>
 
     <button type="submit" class="btn btn-success"
-            [disabled]="!f.form.valid || (f.form.valid && (submitSuccessful===true || !submitSuccessful===false))">
+            [disabled]="!f.form.valid || (f.form.valid && !submitSuccessful==undefined)">
       Confirmar
     </button>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Operacao
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful==true" class="alert alert-danger small">Operacao
       falhou
     </div>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">Operacao
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful==false" class="alert alert-success small">Operacao
       efetuada
     </div>
   </form>

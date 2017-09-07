@@ -71,13 +71,13 @@
       </div>
     </fieldset>
 
-    <button type="submit" class="btn btn-success" [disabled]="submitSuccessful===true || submitSuccessful===false">
+    <button type="submit" class="btn btn-success" [disabled]="!submitSuccessful==undefined">
       Confirmar
     </button>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===true" class="alert alert-danger small">Operacao
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful==true" class="alert alert-danger small">Operacao
       falhou
     </div>
-    <div [hidden]="submitSuccessful==undefined || submitSuccessful===false" class="alert alert-success small">Operacao
+    <div [hidden]="submitSuccessful==undefined || submitSuccessful==false" class="alert alert-success small">Operacao
       confirmada
     </div>
   </form>
