@@ -43,7 +43,7 @@
             <div class="form-group">
               <label class="small" for="dateBirth">Dt.Nasc.</label>
               <input type="date" class="form-control" id="dateBirth" placeholder="27/01/2015" name="dateBirth"
-                     [(ngModel)]="student.dateBirth" #dateBirth="ngModel" required>
+                     [(ngModel)]="student.dateBirth" #dateBirth="ngModel" required useValueAsDate>
               <div [hidden]="dateBirth.valid || dateBirth.pristine" class="alert alert-danger small">Data de nascimento
                 e' obrigatorio
               </div>
@@ -186,7 +186,8 @@
             <div class="form-group">
               <label class="small" for="motherDateBirth">Dt.Nasc.</label>
               <input type="date" class="form-control" id="motherDateBirth" placeholder="01/01/1990"
-                     name="motherDateBirth" [(ngModel)]="student.motherDateBirth" #motherDateBirth="ngModel" required>
+                     name="motherDateBirth" [(ngModel)]="student.motherDateBirth" #motherDateBirth="ngModel" required
+                     useValueAsDate>
               <div [hidden]="motherDateBirth.valid || motherDateBirth.pristine" class="alert alert-danger small">Data de
                 nascimento e' obrigatorio
               </div>
@@ -254,7 +255,8 @@
             <div class="form-group">
               <label class="small" for="fatherDateBirth">Dt.Nasc.</label>
               <input type="date" class="form-control" id="fatherDateBirth" placeholder="01/01/1990"
-                     name="fatherDateBirth" [(ngModel)]="student.fatherDateBirth" #fatherDateBirth="ngModel">
+                     name="fatherDateBirth" [(ngModel)]="student.fatherDateBirth" #fatherDateBirth="ngModel"
+                     useValueAsDate>
               <div [hidden]="fatherDateBirth.valid || fatherDateBirth.pristine" class="alert alert-danger small">Data de
                 nascimento e' invalido
               </div>
@@ -455,7 +457,7 @@
               <label class="small" for="studentEnrollmentDate">Data</label>
               <input type="date" class="form-control" id="studentEnrollmentDate" placeholder="01/01/2017"
                      name="studentEnrollmentDate" [(ngModel)]="student.enrollments[0].studentEnrollmentDate"
-                     #studentEnrollmentDate="ngModel" required>
+                     #studentEnrollmentDate="ngModel" required useValueAsDate>
               <div [hidden]="studentEnrollmentDate.valid || studentEnrollmentDate.pristine"
                    class="alert alert-danger small">Data e' obrigatorio
               </div>

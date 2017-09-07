@@ -24,8 +24,8 @@
       </div>
       <div class="form-group">
         <label class="small" for="dateBirth">Dt.Nasc.</label>
-        <input type="text" class="form-control" id="dateBirth" name="dateBirth" [(ngModel)]="formattedDateBirth"
-               #dateBirth="ngModel" readonly>
+        <input type="date" class="form-control" id="dateBirth" name="dateBirth" [(ngModel)]="student.dateBirth"
+               #dateBirth="ngModel" readonly useValueAsDate>
       </div>
       <div class="form-group">
         <label class="small" for="race">Cor/Raca</label>

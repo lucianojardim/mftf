@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
+import {DateValueAccessorModule} from 'angular-date-value-accessor';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -15,7 +16,8 @@ import {StudentDetailComponent} from './student-detail/student-detail.component'
     HttpModule,
     FormsModule,
     SharedModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    DateValueAccessorModule
   ],
   declarations: [
     StudentListComponent,

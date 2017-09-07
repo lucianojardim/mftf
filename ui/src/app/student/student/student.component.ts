@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   studentId: number = 0;
   student: Student;
   err: Error | null | undefined;
-  formattedDateBirth: string;
+
   submitSuccessful: boolean;
 
   constructor(private _studentService: StudentService,
@@ -43,7 +43,6 @@ export class StudentComponent implements OnInit {
   async findOne(studentId: number): Promise<void> {
     try {
       this.student = await this._studentService.findOne(studentId);
-      this.formattedDateBirth = this.student.dateBirth.toISOString().substring(0, 10);
     } catch (err) {
       this.err = err;
       throw err;
