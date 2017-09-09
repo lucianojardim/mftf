@@ -10,7 +10,6 @@ export class CityService {
   constructor() {
     this._elements = [
       new City(977, 'Abadia de Goi�s')
-      /*,
       new City(2, 'Abadia dos Dourados'),
       new City(3, 'Abadi�nia'),
       new City(4, 'Abaetetuba'),
@@ -5574,7 +5573,6 @@ export class CityService {
       new City(5562, '�ngulo'),
       new City(5563, '�rico Cardoso'),
       new City(5564, '�urea')
-      */
     ];
   }
 

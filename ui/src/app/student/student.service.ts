@@ -17,9 +17,9 @@ import {StudentDatabase} from './student-database.interface';
 
 @Injectable()
 export class StudentService {
-  private studentHostName = 'secure-beach-78142.herokuapp.com';
-  private studentPortNum = 3000;
-  private studentHost: string = this.studentHostName + ':' + this.studentPortNum;
+  private studentHostName = 'mftf-api.herokuapp.com';
+  private studentPortNum;
+  private studentHost: string = this.studentPortNum ? this.studentHostName + ':' + this.studentPortNum : this.studentHostName;
   private url: string = 'https://' + this.studentHost;
 
   constructor(private _http: Http,
