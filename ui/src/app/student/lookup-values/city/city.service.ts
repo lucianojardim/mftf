@@ -9,7 +9,7 @@ export class CityService {
 
   constructor() {
     this._elements = [
-      new City(977, 'Abadia de Goi�s')
+      new City(977, 'Abadia de Goi�s'),
       new City(2, 'Abadia dos Dourados'),
       new City(3, 'Abadi�nia'),
       new City(4, 'Abaetetuba'),
