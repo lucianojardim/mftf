@@ -32,5 +32,5 @@ const expressApp = createExpressServer({
  * Start the express app.
  */
 expressApp.use(compression());
-expressApp.listen(3000);
-console.log("Server is up and running at port 3000");
+expressApp.listen(process.env.PORT || 3000);
+console.log("Server is up and running at port "+process.env.PORT || 3000);
