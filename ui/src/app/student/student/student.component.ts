@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 import {StudentService} from '../student.service';
 import {Student} from '../student.model';
@@ -58,4 +58,11 @@ export class StudentComponent implements OnInit {
     }
   }
 
+  isActivatedRouteDelete(): boolean {
+    return this._activatedRoute.toString().indexOf('delete') >= 0;
+  }
+
+  isActivatedRouteDetail(): boolean {
+    return this._activatedRoute.toString().indexOf('detail') >= 0;
+  }
 }

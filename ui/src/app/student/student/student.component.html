@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Confirme a operacao</h2>
+  <h2>Dados do estudante</h2>
   <hr>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
     <fieldset class="form-group-sm">
@@ -70,8 +70,7 @@
         </div>
       </div>
     </fieldset>
-
-    <button type="submit" class="btn btn-success" [disabled]="!submitSuccessful==undefined">
+    <button *ngIf="isActivatedRouteDelete()" type="submit" class="btn btn-success" [disabled]="!submitSuccessful==undefined">
       Confirmar
     </button>
     <div [hidden]="submitSuccessful==undefined || submitSuccessful==true" class="alert alert-danger small">Operacao
@@ -81,4 +80,11 @@
       confirmada
     </div>
   </form>
+</div>
+<div *ngIf="err">
+  <h3>Error found executing: student.component.</h3>
+  <hr>
+  <div class="bg-danger text-danger">
+    {{err}}
+  </div>
 </div>

@@ -504,3 +504,10 @@
     </div>
   </form>
 </div>
+<div *ngIf="err">
+  <h3>Error found executing: student-detail.component.</h3>
+  <hr>
+  <div class="bg-danger text-danger">
+    {{err}}
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 import {Student} from '../student.model';
 import {Gender} from '../lookup-values/gender/gender.model';
@@ -67,11 +67,11 @@ export class StudentDetailComponent implements OnInit {
     try {
       this.setSelectOptions();
 
-      if (this._isActivatedRouteUpdate()) {
+      if (this.isActivatedRouteUpdate()) {
         await this.findOne(await this.getStudentId());
       }
 
-      if (this._isActivatedRouteAdd()) {
+      if (this.isActivatedRouteAdd()) {
         this.student = this._studentService.resetStudent();
       }
 
@@ -154,7 +154,7 @@ export class StudentDetailComponent implements OnInit {
   }
 
   filterBirthPlaceCity() {
-    if (this.queryBirthPlaceCity !== "") {
+    if (this.queryBirthPlaceCity !== '') {
       this.filteredListBirthPlaceCity = this.cityNames.filter(function (cityName) {
         return cityName.toLowerCase().indexOf(this.queryBirthPlaceCity.toLowerCase()) > -1;
       }.bind(this));
@@ -164,7 +164,7 @@ export class StudentDetailComponent implements OnInit {
   }
 
   filterAddressLocalityCity() {
-    if (this.queryAddressLocalityCity !== "") {
+    if (this.queryAddressLocalityCity !== '') {
       this.filteredListAddressLocalityCity = this.cityNames.filter(function (cityName) {
         return cityName.toLowerCase().indexOf(this.queryAddressLocalityCity.toLowerCase()) > -1;
       }.bind(this));
@@ -173,12 +173,12 @@ export class StudentDetailComponent implements OnInit {
     }
   }
 
-  private _isActivatedRouteUpdate(): boolean {
-    return this._activatedRoute.toString().indexOf('update') > 0;
+  isActivatedRouteUpdate(): boolean {
+    return this._activatedRoute.toString().indexOf('update') >= 0;
   }
 
-  private _isActivatedRouteAdd(): boolean {
-    return this._activatedRoute.toString().indexOf('add') > 0;
+  isActivatedRouteAdd(): boolean {
+    return this._activatedRoute.toString().indexOf('add') >= 0;
   }
 
 }

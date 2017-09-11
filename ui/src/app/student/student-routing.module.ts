@@ -21,6 +21,9 @@ const studentRoutes: Routes = [
     path: 'delete/:studentId', component: StudentComponent
   },
   {
+    path: 'detail/:studentId', component: StudentComponent
+  },
+  {
     path: 'update/:studentId', component: StudentDetailComponent
   }
 ];

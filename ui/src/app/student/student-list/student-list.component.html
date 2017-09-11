@@ -10,13 +10,29 @@
     <thead>
     <tr>
       <th class="hidden">#</th>
-      <th></th>
-      <th></th>
-      <th>Nome</th>
-      <th>Sobrenome</th>
-      <th>Dt.Nasc.</th>
-      <th>Mae</th>
-      <th>Unidade</th>
+      <th><br></th>
+      <th><br></th>
+      <th><br></th>
+      <th>
+        <input #filterStudentFirstName 
+        (keyup)="onFilterStudentFirstName(filterStudentFirstName.value)"
+        (blur)="onFilterStudentFirstName(filterStudentFirstName.value)">
+        <br>Nome
+      </th>
+      <th>
+        <input #filterStudentLastName 
+        (keyup)="onFilterStudentLastName(filterStudentLastName.value)"
+        (blur)="onFilterStudentLastName(filterStudentLastName.value)">
+        <br>Sobrenome
+      </th>
+      <th><br>Dt.Nasc.</th>
+      <th><br>Mae</th>
+      <th>
+        <input #filterStudentEducationCenterName 
+        (keyup)="onFilterStudentEducationCenterName(filterStudentEducationCenterName.value)"
+        (blur)="onFilterStudentEducationCenterName(filterStudentEducationCenterName.value)">
+        <br>Unidade
+      </th>
     </tr>
     </thead>
     <tbody>
@@ -25,21 +41,22 @@
       </th>
       <td><a routerLinkActive="active" [routerLink]="['/students/delete/'+student.id]">Remover</a></td>
       <td><a routerLinkActive="active" [routerLink]="['/students/update/'+student.id]">Atualizar</a></td>
-      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.firstName}}</a>
+      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">Listar</a>
       </td>
-      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.lastName}}</a>
+      <td><p>{{student.firstName}}</p>
       </td>
-      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.dateBirth | date:
-        'dd/MM/yyyy'}}</a>
+      <td><p>{{student.lastName}}</p>
       </td>
-      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.motherName}}</a>
+      <td><p>{{student.dateBirth | date:
+        'dd/MM/yyyy'}}</p>
       </td>
-      <td><a routerLinkActive="active" [routerLink]="['/students/detail/'+student.id]">{{student.enrollmentMostCurrent.educationCenter.name}}</a>
+      <td><p>{{student.motherName}}</p>
+      </td>
+      <td><p>{{student.enrollmentMostCurrent.educationCenter.name}}</p>
       </td>
     </tr>
     </tbody>
   </table>
-  <router-outlet></router-outlet>
 </div>
 <div *ngIf="err">
   <h3>Error found executing: student-list.component.</h3>
