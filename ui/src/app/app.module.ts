@@ -18,6 +18,12 @@ import {GroupService} from './student/lookup-values/group/group.service';
 import {RaceService} from './student/lookup-values/race/race.service';
 import {SchoolingService} from './student/lookup-values/schooling/schooling.service';
 import {StateService} from './student/lookup-values/state/state.service';
+import {StudentService} from './student/student.service';
+import {UserService} from './shared/user/user.service';
+
+import {AuthGuardService} from './shared/auth/auth-guard.service';
+import {AuthService} from './shared/auth/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +38,8 @@ import {StateService} from './student/lookup-values/state/state.service';
     StudentModule
   ],
   providers: [
+    AuthService,
+    AuthGuardService,
     CityService,
     CountryService,
     EducationCenterService,
@@ -40,7 +48,9 @@ import {StateService} from './student/lookup-values/state/state.service';
     GroupService,
     RaceService,
     SchoolingService,
-    StateService
+    StateService,
+    StudentService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

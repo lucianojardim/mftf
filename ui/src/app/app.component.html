@@ -1,5 +1,8 @@
 <app-header></app-header>
 <div class="container">
+  <div class="pull-right">
+    <a (click)="authService.logout()">sair</a>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <router-outlet></router-outlet>

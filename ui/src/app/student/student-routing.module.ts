@@ -5,6 +5,8 @@ import {StudentListComponent} from './student-list/student-list.component';
 import {StudentDetailComponent} from './student-detail/student-detail.component';
 import {StudentComponent} from './student/student.component';
 
+import {AuthGuardService} from '../shared/auth/auth-guard.service';
+
 const studentRoutes: Routes = [
   {
     path: '', component: StudentListComponent
@@ -15,16 +17,16 @@ const studentRoutes: Routes = [
   // ]
   // },
   {
-    path: 'add', component: StudentDetailComponent
+    path: 'add', canActivate: [AuthGuardService], component: StudentDetailComponent
   },
   {
-    path: 'delete/:studentId', component: StudentComponent
+    path: 'delete/:studentId', canActivate: [AuthGuardService], component: StudentComponent
   },
   {
-    path: 'detail/:studentId', component: StudentComponent
+    path: 'detail/:studentId', canActivate: [AuthGuardService], component: StudentComponent
   },
   {
-    path: 'update/:studentId', component: StudentDetailComponent
+    path: 'update/:studentId', canActivate: [AuthGuardService], component: StudentDetailComponent
   }
 ];
 

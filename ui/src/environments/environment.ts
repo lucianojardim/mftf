@@ -5,7 +5,6 @@
 
 export const environment = {
   production: false,
-  studentProtocol: 'http',
-  studentHostName: 'localhost',
-  studentPortNum: 3000
+  studentApiUrl: 'http://localhost:3000',
+  authenticationCallback: 'http://localhost:4200/callback'
 };

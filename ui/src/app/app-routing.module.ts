@@ -4,8 +4,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 
+import {CallbackComponent} from './shared/callback/callback.component';
+
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LoginComponent } from './core/login/login.component';
+
+import {AuthGuardService} from './shared/auth/auth-guard.service';
+// canActivate: [AuthGuardService],
 
 const appRoutes: Routes = [
   {
@@ -15,7 +20,10 @@ const appRoutes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'students', loadChildren: './student/student.module#StudentModule'
+    path: 'students', canActivate: [AuthGuardService], loadChildren: './student/student.module#StudentModule'
+  },
+  {
+    path: 'callback', component: CallbackComponent
   },
   {
     path: '**', component: PageNotFoundComponent

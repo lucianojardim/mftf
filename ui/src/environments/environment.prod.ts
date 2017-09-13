@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  studentProtocol: 'https',
-  studentHostName: 'mftf-api.herokuapp.com',
-  studentPortNum: null
+  studentApiUrl: 'https://mftf-api.herokuapp.com',
+  authenticationCallback: 'https://mftf-ui.herokuapp.com/callback'
 };

@@ -17,7 +17,7 @@ import {StudentDetailComponent} from './student-detail/student-detail.component'
     FormsModule,
     SharedModule,
     StudentRoutingModule,
-    DateValueAccessorModule
+    DateValueAccessorModule // contributed module to allow input type=date and ngModel work together
   ],
   declarations: [
     StudentListComponent,

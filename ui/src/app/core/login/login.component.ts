@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 
-import {UserService} from '../../shared/user/user.service';
+import {AuthService} from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +9,12 @@ import {UserService} from '../../shared/user/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _userService: UserService, private _router: Router) {
+  constructor(public authService: AuthService) {
+    if (authService.isAuthenticated()) authService.logout();
+    authService.login()
   }
 
   ngOnInit() {
   }
 
-  getUserInformationByEmailAddress(emailAddress: string) {
-    // this._userService.setCurrentUser(emailAddress);
-    this._router.navigate(['/students'])
-      .then()
-      .catch();
-  }
 }

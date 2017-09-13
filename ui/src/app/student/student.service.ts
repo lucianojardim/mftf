@@ -19,11 +19,7 @@ import { StudentDatabase } from './student-database.interface';
 
 @Injectable()
 export class StudentService {
-  private _studentProtocol = environment.studentProtocol;
-  private _studentHostName = environment.studentHostName;
-  private _studentPortNum = environment.studentPortNum;
-  private _studentHost: string = this._studentPortNum ? this._studentHostName + ':' + this._studentPortNum : this._studentHostName;
-  private _url: string = this._studentProtocol + '://' + this._studentHost;
+  private _studentApiUrl: string = environment.studentApiUrl;
 
   private static _convertStudentToStudentDatabase(student: Student): StudentDatabase {
     return {
@@ -138,7 +134,7 @@ export class StudentService {
 
   async findAll(): Promise<Student[]> {
     try {
-      const response: Response = await this._http.get(this._url + '/students').toPromise();
+      const response: Response = await this._http.get(this._studentApiUrl + '/students').toPromise();
       const studentsDatabase: StudentDatabase[] = response.json() as StudentDatabase[];
       const students = studentsDatabase.map((databaseRow: StudentDatabase) => {
         return (this._convertStudentDatabaseToStudent(databaseRow));
@@ -152,7 +148,7 @@ export class StudentService {
 
   async findOne(studentId: number): Promise<Student> {
     try {
-      const response: Response = await this._http.get(this._url + '/students/' + studentId.toString()).toPromise();
+      const response: Response = await this._http.get(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
       const databaseRow: StudentDatabase = response.json() as StudentDatabase;
       const student = this._convertStudentDatabaseToStudent(databaseRow);
       return Promise.resolve(student);
@@ -165,7 +161,7 @@ export class StudentService {
     let successful = false;
     try {
       const databaseRow: StudentDatabase = StudentService._convertStudentToStudentDatabase(student);
-      const response: Response = await this._http.post(this._url + '/students', databaseRow).toPromise();
+      const response: Response = await this._http.post(this._studentApiUrl + '/students', databaseRow).toPromise();
       successful = response.json() as boolean;
       return Promise.resolve(successful);
     } catch (err) {
@@ -175,7 +171,7 @@ export class StudentService {
 
   async remove(studentId: number): Promise<boolean> {
     try {
-      const response: Response = await this._http.delete(this._url + '/students/' + studentId.toString()).toPromise();
+      const response: Response = await this._http.delete(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
       const successful = response.json() as boolean;
       return Promise.resolve(successful);
     } catch (err) {
