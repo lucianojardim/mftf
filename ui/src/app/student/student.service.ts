@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 
 import { environment } from '../../environments/environment';
 
+import { AuthService } from '../shared/auth/auth.service';
+
 import { GenderService } from './lookup-values/gender/gender.service';
 import { RaceService } from './lookup-values/race/race.service';
 import { CountryService } from './lookup-values/country/country.service';
@@ -129,7 +131,8 @@ export class StudentService {
     private _schoolingService: SchoolingService,
     private _educationCenterService: EducationCenterService,
     private _groupService: GroupService,
-    private _enrollmentStatusService: EnrollmentStatusService) {
+    private _enrollmentStatusService: EnrollmentStatusService,
+    private _authService: AuthService) {
   }
 
   async findAll(): Promise<Student[]> {
@@ -140,7 +143,15 @@ export class StudentService {
         return (this._convertStudentDatabaseToStudent(databaseRow));
       }
       );
-      return Promise.resolve(students);
+
+      // filter students returned based on education centers the user is allowed to display
+      const userEducationCenters = await this._authService.getAuthorizedEducationUnits();
+      const studentsBelongEducationCenters = students.filter(
+        (student: Student) => userEducationCenters.find(
+          userEducationCenter => student.enrollmentMostCurrent.educationCenter.name.toLowerCase() === userEducationCenter.toLowerCase()
+        )
+      );
+      return Promise.resolve(studentsBelongEducationCenters);
     } catch (err) {
       throw err;
     }
