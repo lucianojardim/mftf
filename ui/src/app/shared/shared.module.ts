@@ -20,7 +20,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   exports: [
     CommonModule,
     HeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CallbackComponent
   ]
 })
 export class SharedModule {
