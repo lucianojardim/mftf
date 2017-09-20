@@ -9,22 +9,22 @@ import {Student} from "../model/student.model";
 @JsonController()
 export class StudentController {
 
-    constructor(private studentRepository: StudentRepository) {
+    constructor(private _studentRepository: StudentRepository) {
     }
 
     @Get("/students")
     findAll(): Promise<Student[]> {
-        return this.studentRepository.findAll();
+        return this._studentRepository.findAll();
     }
 
     @Get("/students/:studentId")
     findOne(@Param("studentId") studentId: number): Promise<Student> {
-        return this.studentRepository.findOne(studentId);
+        return this._studentRepository.findOne(studentId);
     }
 
     @Post("/students")
     save(@Body() student: Student): Promise<boolean> {
-        this.studentRepository.save(student)
+        this._studentRepository.save(student)
             .then(
                 (runResult: RunResult) => {
                     if (runResult.changes > 0) {
@@ -39,7 +39,7 @@ export class StudentController {
 
     @Delete("/students/:studentId")
     remove(@Param("studentId") studentId: number): Promise<boolean> {
-        this.studentRepository.remove(studentId)
+        this._studentRepository.remove(studentId)
             .then(
                 (runResult: RunResult) => {
                     if (runResult.changes > 0) {
