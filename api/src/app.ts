@@ -1,10 +1,9 @@
-import "reflect-metadata";
-import {createExpressServer, useContainer, useExpressServer} from "routing-controllers";
-import {Container} from "typedi";
-import {StudentController} from "./controller/student-controller";
+import { CorsMiddleware } from './middleware/cors-middleware';
+import * as express from 'express';
 
-let cors = require("cors");
-let compression = require("compression");
+import 'reflect-metadata';
+import { Action, createExpressServer, MiddlewareMetadata, useContainer, useExpressServer } from 'routing-controllers';
+import {Container} from "typedi";
 
 /**
  * Setup routing-controllers to use typedi container.
@@ -16,21 +15,37 @@ useContainer(Container);
  * We could have also use useExpressServer here to attach controllers to an existing express instance.
  */
 const expressApp = createExpressServer({
-    /**
-     * We can add options about how routing-controllers should configure itself.
-     */
+    authorizationChecker: async (action: Action, roles: string[]) => {
+        let authorize: boolean = false;
+        const permissions = ["test"];
+        for (var i = 0; i < permissions.length; i++) {
+            if (action.request.user.scope.includes(permissions[i])) {
+                authorize = true;
+            } else {
+                authorize = false;
+            }
+        }
+        return authorize;
+    },
+    // currentUserChecker: async (action: Action) => {
+    //     // here you can use request/response objects from action
+    //     // you need to provide a user object that will be injected in controller actions
+    //     // demo code:
+    //     const token = action.request.headers["authorization"];
+    //     return getEntityManager().findOneByToken(User, token);
+    // },
     cors: true,
-    /**
-     * Here we specify what controllers should be registered in our express server.
-     */
+
     controllers: [
-        StudentController
+        __dirname + "/controller/**/*.js"
+    ],
+    middlewares: [
+        __dirname + "/middleware/**/*.js"
     ]
 });
 
 /**
  * Start the express app.
  */
-expressApp.use(compression());
 expressApp.listen(process.env.PORT || 3000);
 console.log("Server is up and running at port "+ (process.env.PORT || 3000) );
