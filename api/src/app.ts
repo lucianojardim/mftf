@@ -1,16 +1,13 @@
 import * as express from 'express';
 
 import 'reflect-metadata';
-import { Action, createExpressServer, MiddlewareMetadata, useContainer, useExpressServer } from 'routing-controllers';
+import { Action, createExpressServer, useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from "typedi";
 
 let jwt = require("express-jwt");
 let rsaValidation = require("auth0-api-jwt-rsa-validation");
 
 let morgan = require("morgan");
-// let fs = require("fs");
-// let path = require("path");
-// let rfs = require("rotating-file-stream");
 
 let cors = require("cors");
 
@@ -25,19 +22,6 @@ useContainer(Container);
 
 const app = express();
 
-/**
- * Define logging
- */
-// const logDirectory = path.join(__dirname, 'log')
-// // ensure log directory exists 
-// fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-// // create a rotating write stream 
-// const accessLogStream = rfs('access.log', {
-//     interval: '1d', // rotate daily 
-//     maxFiles: 3,
-//     path: logDirectory
-//   });
-// app.use(morgan("combined", {stream: accessLogStream}));
 app.use(morgan("combined"));
 
 app.use(helmet());
@@ -49,18 +33,6 @@ const jwtCheck = jwt({
     audience: "mftfapi"
 });
 app.use(jwtCheck);
-// , function (err: express.Errback, req: express.Request, res: express.Response, next: express.NextFunction) {
-//     if (err.name === 'UnauthorizedError') {
-//         res.status(401).json({ message: 'Missing or invalid token' });
-//     }
-//     res.sendStatus(200);
-// });
-// If we do not get the correct credentials, we’ll return an appropriate message
-// app.use(function (err: express.Errback, req: express.Request, res: express.Response, next: express.NextFunction) {
-//     if (err.name === 'UnauthorizedError') {
-//       res.status(401).json({message:'Missing or invalid token'});
-//     }
-//   });
 
 app.use(compression());
 

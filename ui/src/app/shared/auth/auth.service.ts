@@ -8,7 +8,7 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class AuthService {
 
-  auth0 = new auth0.WebAuth({
+  private _auth0 = new auth0.WebAuth({
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
@@ -22,13 +22,13 @@ export class AuthService {
   constructor(private _router: Router) {}
 
   public login(): void {
-    this.auth0.authorize({
+    this._auth0.authorize({
       connection: 'google-oauth2' // Only Google login allowed
     });
   }
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+    this._auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
@@ -91,7 +91,6 @@ export class AuthService {
         resolve(this._educationUnitsUsersAllowed)
       }
     }));
-
   }
 
 }
