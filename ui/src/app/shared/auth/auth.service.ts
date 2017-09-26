@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { AUTH_CONFIG } from './auth0-variables';
 import * as auth0 from 'auth0-js';
-import Auth0Lock from 'auth0-lock';
 
 @Injectable()
 export class AuthService {
@@ -13,14 +12,14 @@ export class AuthService {
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+    audience: 'mftfapi',
     redirectUri: AUTH_CONFIG.callbackURL,
-    scope: 'openid'
+    scope: 'openid  write:students'
   });
 
- private _educationUnitsUsersAllowed: string[] = [];
+  private _educationUnitsUsersAllowed: string[] = [];
 
-  constructor(public router: Router) {}
+  constructor(private _router: Router) {}
 
   public login(): void {
     this.auth0.authorize({
@@ -31,18 +30,13 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        //
-        //
-        console.log(authResult);
-        //
-        //
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/students'])
+        this._router.navigate(['/students'])
           .then()
           .catch();
       } else if (err) {
-        this.router.navigate(['/failedauthentication'])
+        this._router.navigate(['/failedauthentication'])
           .then()
           .catch();
         console.log(err);
@@ -66,7 +60,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/'])
+    this._router.navigate(['/'])
       .then()
       .catch();
   }
@@ -101,4 +95,3 @@ export class AuthService {
   }
 
 }
-

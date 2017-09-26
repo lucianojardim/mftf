@@ -2,7 +2,7 @@ import * as express from 'express';
 
 import 'reflect-metadata';
 import { Action, createExpressServer, MiddlewareMetadata, useContainer, useExpressServer } from 'routing-controllers';
-import {Container} from "typedi";
+import { Container } from "typedi";
 
 let jwt = require("express-jwt");
 let rsaValidation = require("auth0-api-jwt-rsa-validation");
@@ -44,12 +44,18 @@ app.use(helmet());
 
 const jwtCheck = jwt({
     secret: rsaValidation(),
-    algorithms: ['RS256'],
+    algorithms: ["RS256"],
     issuer: "https://mftfapi.auth0.com/",
     audience: "mftfapi"
-  });
+});
 app.use(jwtCheck);
-// // If we do not get the correct credentials, we’ll return an appropriate message
+// , function (err: express.Errback, req: express.Request, res: express.Response, next: express.NextFunction) {
+//     if (err.name === 'UnauthorizedError') {
+//         res.status(401).json({ message: 'Missing or invalid token' });
+//     }
+//     res.sendStatus(200);
+// });
+// If we do not get the correct credentials, we’ll return an appropriate message
 // app.use(function (err: express.Errback, req: express.Request, res: express.Response, next: express.NextFunction) {
 //     if (err.name === 'UnauthorizedError') {
 //       res.status(401).json({message:'Missing or invalid token'});
@@ -75,7 +81,7 @@ app.use(cors(corsOptions));
  * We create a new express server instance.
  * We could have also use useExpressServer here to attach controllers to an existing express instance.
  */
-const expressApp = useExpressServer(app,{
+const expressApp = useExpressServer(app, {
     authorizationChecker: async (action: Action, roles: string[]) => {
         let authorize: boolean = false;
         const permissions = ["write:students"];
@@ -104,4 +110,4 @@ const expressApp = useExpressServer(app,{
  * Start the express app.
  */
 expressApp.listen(process.env.PORT || 3000);
-console.log("Server is up and running at port "+ (process.env.PORT || 3000) );
+console.log("Server is up and running at port " + (process.env.PORT || 3000));

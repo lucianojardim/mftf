@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 import { environment } from '../../environments/environment';
 
@@ -122,7 +123,9 @@ export class StudentService {
     };
   }
 
-  constructor(private _http: Http,
+  constructor(
+    private _http: Http,
+    private _authHttp: AuthHttp,
     private _genderService: GenderService,
     private _raceService: RaceService,
     private _countryService: CountryService,
@@ -132,12 +135,12 @@ export class StudentService {
     private _educationCenterService: EducationCenterService,
     private _groupService: GroupService,
     private _enrollmentStatusService: EnrollmentStatusService,
-    private _authService: AuthService) {
-  }
+    private _authService: AuthService
+  ) {}
 
   async findAll(): Promise<Student[]> {
     try {
-      const response: Response = await this._http.get(this._studentApiUrl + '/students').toPromise();
+      const response: Response = await this._authHttp.get(this._studentApiUrl + '/students').toPromise();
       const studentsDatabase: StudentDatabase[] = response.json() as StudentDatabase[];
       const students = studentsDatabase.map((databaseRow: StudentDatabase) => {
         return (this._convertStudentDatabaseToStudent(databaseRow));
@@ -159,7 +162,7 @@ export class StudentService {
 
   async findOne(studentId: number): Promise<Student> {
     try {
-      const response: Response = await this._http.get(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
+      const response: Response = await this._authHttp.get(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
       const databaseRow: StudentDatabase = response.json() as StudentDatabase;
       const student = this._convertStudentDatabaseToStudent(databaseRow);
       return Promise.resolve(student);
@@ -172,7 +175,7 @@ export class StudentService {
     let successful = false;
     try {
       const databaseRow: StudentDatabase = StudentService._convertStudentToStudentDatabase(student);
-      const response: Response = await this._http.post(this._studentApiUrl + '/students', databaseRow).toPromise();
+      const response: Response = await this._authHttp.post(this._studentApiUrl + '/students', databaseRow).toPromise();
       successful = response.json() as boolean;
       return Promise.resolve(successful);
     } catch (err) {
@@ -182,7 +185,7 @@ export class StudentService {
 
   async remove(studentId: number): Promise<boolean> {
     try {
-      const response: Response = await this._http.delete(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
+      const response: Response = await this._authHttp.delete(this._studentApiUrl + '/students/' + studentId.toString()).toPromise();
       const successful = response.json() as boolean;
       return Promise.resolve(successful);
     } catch (err) {

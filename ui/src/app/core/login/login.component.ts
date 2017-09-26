@@ -10,8 +10,10 @@ import {AuthService} from '../../shared/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(public authService: AuthService) {
-    if (authService.isAuthenticated()) authService.logout();
-    authService.login()
+    if (authService.isAuthenticated()) {
+      authService.logout();
+    }
+    authService.login();
   }
 
   ngOnInit() {
