@@ -4,16 +4,16 @@ import 'reflect-metadata';
 import { Action, createExpressServer, useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from "typedi";
 
-let jwt = require("express-jwt");
-let rsaValidation = require("auth0-api-jwt-rsa-validation");
+const jwt = require("express-jwt");
+const rsaValidation = require("auth0-api-jwt-rsa-validation");
 
-let morgan = require("morgan");
+const morgan = require("morgan");
 
-let cors = require("cors");
+const cors = require("cors");
 
-let helmet = require("helmet");
+const helmet = require("helmet");
 
-let compression = require("compression");
+const compression = require("compression");
 
 /**
  * Setup routing-controllers to use typedi container.

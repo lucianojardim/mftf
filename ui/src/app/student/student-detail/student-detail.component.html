@@ -59,7 +59,7 @@
             <div class="form-group">
               <label class="small" for="birthPlaceCity">Naturalidade</label>
               <div class="form-inline">
-                <input type="text" class="form-control" id="birthPlaceCity" placeholder="Goiania" name="birthPlaceCity"
+                <input autocomplete="off" type="text" class="form-control" id="birthPlaceCity" placeholder="Goiania" name="birthPlaceCity"
                        [(ngModel)]="queryBirthPlaceCity" (keyup)="filterBirthPlaceCity()" #birthPlaceCity="ngModel"
                        required>
                 <div [hidden]="birthPlaceCity.valid || birthPlaceCity.pristine" class="alert alert-danger small">Cidade
@@ -109,7 +109,7 @@
                        name="addressSubDivision" [(ngModel)]="student.addressSubDivision" #addressSubDivision="ngModel">
               </div>
               <div class="form-inline">
-                <input type="text" class="form-control" id="addressLocalityCity" placeholder="Goiania"
+                <input autocomplete="off" type="text" class="form-control" id="addressLocalityCity" placeholder="Goiania"
                        name="addressLocalityCity" [(ngModel)]="queryAddressLocalityCity"
                        (keyup)="filterAddressLocalityCity()" #addressLocalityCity="ngModel" required>
                 <div [hidden]="addressLocalityCity.valid || addressLocalityCity.pristine"

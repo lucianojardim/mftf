@@ -1,12 +1,14 @@
 import {Service} from "typedi";
 import * as path from "path";
-import * as sqlite3 from "sqlite3";    
+import * as sqlite3 from "sqlite3";
+const CryptoJS = require("crypto-js");
 
 import {Student} from "../model/student.model";
 
 @Service()
 export class StudentRepository {
 
+    private AES_SECRET: string = "L3LDX9-LT9hfLPRdT6rNtfYfcwOD-UVNVp57VaqWnYaT--zDuybL8cP5XC5sal6a";
     private db: sqlite3.Database;
     private dbname: string = "mftf.db";
     private listTableColumnsExceptPK: string =
@@ -294,7 +296,7 @@ export class StudentRepository {
         this.db.on("error", (err: Error) => console.error(err+"\n"));
         this.db.on("open", () => console.log(`Database ${this.dbname} was opened`+"\n"));
         this.db.on("close", () => console.log(`Database ${this.dbname} was closed`+"\n"));
-        this.run("PRAGMA foreign_keys = ON")
+        this._run("PRAGMA foreign_keys = ON")
             .then()
             .catch(err => console.error(err));
     }
@@ -307,10 +309,11 @@ export class StudentRepository {
                 reject(new Error('Database connection not open'));
                 return;
             }
-            this.db.all(sql, params, function (this: sqlite3.Statement, err: Error | null, rows: Student[]) : void {
+            this.db.all(sql, params, (err: Error | null, rows: Student[]) => {
                 if (err) {
                     reject(err);
                 } else {
+                    rows = this._decryptStudents(rows);
                     resolve(rows);
                 }
             });
@@ -325,10 +328,11 @@ export class StudentRepository {
                 reject(new Error('Database connection not open'));
                 return;
             }
-            this.db.get(sql, params, function (this: sqlite3.Statement, err: Error | null, row: Student) : void {
+            this.db.get(sql, params, (err: Error | null, row: Student) => {
                 if (err) {
                     reject(err);
                 } else {
+                    row = this._decryptStudent(row);
                     resolve(row);
                 }
             });
@@ -342,6 +346,7 @@ export class StudentRepository {
 
         let params: any;
         let sql: string;
+        student = this._encryptStudent(student);
         if (student.studentId) { // update
             params = {
                 $studentId: student.studentId,
@@ -526,7 +531,7 @@ export class StudentRepository {
             };
             sql = this.insert;
         }
-        return this.run(sql,params);
+        return this._run(sql,params);
     }
 
     remove(studentId: number): Promise<sqlite3.RunResult> {
@@ -534,10 +539,10 @@ export class StudentRepository {
             $studentId: studentId
         }
         const sql: string = this.delete;
-        return this.run(sql,params);
+        return this._run(sql,params);
     }
 
-    private run(sql: string, params?: any): Promise<sqlite3.RunResult> {
+    private _run(sql: string, params?: any): Promise<sqlite3.RunResult> {
         return new Promise<sqlite3.RunResult>((resolve, reject) => {
             if (!this.db) {
                 reject(new Error('Database connection not open'));
@@ -551,6 +556,73 @@ export class StudentRepository {
                 }
             });
         });
+    }
+
+    // refactor encrypt student
+    private _decryptStudents(encryptedStudents: Student[]): Student[] {
+        let students: Student[] = encryptedStudents;
+        students.forEach( student => this._decryptStudent(student));
+        return students;
+    }
+
+    private _encryptStudent(student: Student): Student {
+        let encryptedStudent: Student = student;
+        encryptedStudent.studentFirstName = this._encrypt(student.studentFirstName);
+        encryptedStudent.studentMiddleName = this._encrypt(student.studentMiddleName);
+        encryptedStudent.studentLastName = this._encrypt(student.studentLastName);
+        encryptedStudent.studentBirthCertificateId = this._encrypt(student.studentBirthCertificateId);
+        encryptedStudent.studentAddressStreet = this._encrypt(student.studentAddressStreet);
+        encryptedStudent.studentAddressSubDivision = this._encrypt(student.studentAddressSubDivision);
+        encryptedStudent.studentAddressCompletement = this._encrypt(student.studentAddressCompletement);
+        encryptedStudent.studentMotherName = this._encrypt(student.studentMotherName);
+        encryptedStudent.studentMotherGovernmentId = this._encrypt(student.studentMotherGovernmentId);
+        encryptedStudent.studentMotherPhoneNum = this._encrypt(student.studentMotherPhoneNum);
+        encryptedStudent.studentFatherName = this._encrypt(student.studentFatherName);
+        encryptedStudent.studentFatherGovernmentId = this._encrypt(student.studentFatherGovernmentId);
+        encryptedStudent.studentFatherPhoneNum = this._encrypt(student.studentFatherPhoneNum);
+        encryptedStudent.studentEmergencyPhoneNum01 = this._encrypt(student.studentEmergencyPhoneNum01);
+        encryptedStudent.studentEmergencyContactName01 = this._encrypt(student.studentEmergencyContactName01);
+        encryptedStudent.studentEmergencyPhoneNum02 = this._encrypt(student.studentEmergencyPhoneNum02);
+        encryptedStudent.studentEmergencyContactName02 = this._encrypt(student.studentEmergencyContactName02);
+        encryptedStudent.studentObservations = this._encrypt(student.studentObservations);
+        return encryptedStudent;
+    }
+
+    private _decryptStudent(encryptedStudent: Student): Student {
+        let student: Student = encryptedStudent;
+        student.studentFirstName = this._decrypt(encryptedStudent.studentFirstName);
+        student.studentMiddleName = this._decrypt(encryptedStudent.studentMiddleName);
+        student.studentLastName = this._decrypt(encryptedStudent.studentLastName);
+        student.studentBirthCertificateId = this._decrypt(encryptedStudent.studentBirthCertificateId);
+        student.studentAddressStreet = this._decrypt(encryptedStudent.studentAddressStreet);
+        student.studentAddressSubDivision = this._decrypt(encryptedStudent.studentAddressSubDivision);
+        student.studentAddressCompletement = this._decrypt(encryptedStudent.studentAddressCompletement);
+        student.studentMotherName = this._decrypt(encryptedStudent.studentMotherName);
+        student.studentMotherGovernmentId = this._decrypt(encryptedStudent.studentMotherGovernmentId);
+        student.studentMotherPhoneNum = this._decrypt(encryptedStudent.studentMotherPhoneNum);
+        student.studentFatherName = this._decrypt(encryptedStudent.studentFatherName);
+        student.studentFatherGovernmentId = this._decrypt(encryptedStudent.studentFatherGovernmentId);
+        student.studentFatherPhoneNum = this._decrypt(encryptedStudent.studentFatherPhoneNum);
+        student.studentEmergencyPhoneNum01 = this._decrypt(encryptedStudent.studentEmergencyPhoneNum01);
+        student.studentEmergencyContactName01 = this._decrypt(encryptedStudent.studentEmergencyContactName01);
+        student.studentEmergencyPhoneNum02 = this._decrypt(encryptedStudent.studentEmergencyPhoneNum02);
+        student.studentEmergencyContactName02 = this._decrypt(encryptedStudent.studentEmergencyContactName02);
+        student.studentObservations = this._decrypt(encryptedStudent.studentObservations);
+        return student;
+    }
+
+    private _encrypt(message: string): string {
+        let encryptedMessage: string = message;
+        const bytes = CryptoJS.AES.encrypt(message, this.AES_SECRET);
+        encryptedMessage = bytes.toString();
+        return encryptedMessage;
+    }
+
+    private _decrypt(encryptedMessage: string): string {
+        let message: string = encryptedMessage;
+        const bytes = CryptoJS.AES.decrypt(encryptedMessage, this.AES_SECRET);
+        message = bytes.toString(CryptoJS.enc.Utf8);
+        return message;
     }
 
 }
