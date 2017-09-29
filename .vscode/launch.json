@@ -1,0 +1,79 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Server",
+      "preLaunchTask": "compileAPI",
+      "program": "${workspaceRoot}/api/src/app.ts",
+      "cwd": "${workspaceRoot}/api",
+      "showAsyncStacks": true,
+      "skipFiles": [
+        "${workspaceRoot}/api/node_modules/**/*.js",
+        "<node_internals>/**/*.js"
+      ],
+      "sourceMaps": true,
+      // "stopOnEntry": true,
+      "runtimeArgs": [
+        "--nolazy"
+      ],
+        "outFiles": [
+          "${workspaceRoot}/api/build/**/*.js"
+        ]
+    },
+    {
+        "name": "Attach to Server",
+        "type": "node",
+        "request": "attach",
+        "port": 5858
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceRoot}/ui/dist",
+      // Uncomment this to run easily alongside another running instance of Chrome
+      "userDataDir": "${workspaceRoot}/.vscode/chrome",
+      // trace gets diagnostic logs in the console
+      // "trace": true,    
+      "smartStep": true,
+      "disableNetworkCache": true,
+      "showAsyncStacks": true,
+      "skipFiles": [
+        "${workspaceRoot}/api/node_modules/**/*.js",
+        "<node_internals>/**/*.js"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to Client",
+      "port": 9222,
+      "webRoot": "${workspaceRoot}/ui/dist"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Server/Client",
+      "configurations": [
+        "Server",
+        "Client"
+      ]
+    }
+  ]
+  /*
+    {
+      "name": "Launch index.html",
+      "type": "chrome",
+      "request": "launch",
+      "file": "${workspaceRoot}/ui/dist/index.html"
+    }
+  ]
+  */
+}
+

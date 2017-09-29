@@ -286,9 +286,10 @@ export class StudentRepository {
 
     constructor() {
         sqlite3.verbose();
-        const dbPath = path.resolve(__dirname, this.dbname);
+        const dbPath = path.resolve("./build/assets/data/", this.dbname);
         this.db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err: Error | null) => {
             if (err) {
+                console.log("Path to the database: ",dbPath);
                 return console.error(err.message);
             }
         });
